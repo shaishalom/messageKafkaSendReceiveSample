@@ -3,10 +3,7 @@ package com.example.main;
 import static com.example.restservice.service.MessageSendService.TOPIC_1;
 import static com.example.restservice.service.MessageSendService.TOPIC_2;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InjectionPoint;
@@ -24,26 +21,27 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
-import org.springframework.kafka.requestreply.RequestReplyFuture;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.restservice.converter.MessageToXMLConverter;
 import com.example.restservice.converter.XMLtoMessageConverter;
-import com.example.restservice.dto.MessageDTO;
 import com.thoughtworks.xstream.XStream;
 
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @ComponentScan("com.example")
 @EnableSwagger2
-@EnableWebMvc
-
 public class MessageApplication implements WebMvcConfigurer{
 
 	
@@ -104,7 +102,26 @@ public class MessageApplication implements WebMvcConfigurer{
         return new NewTopic(TOPIC_2, 1, (short) 1);
     }
 
+    
+	@Bean
+    public Docket api() { 
+        return new Docket(DocumentationType.SWAGGER_2)  
+          .select()                                  
+          .apis(RequestHandlerSelectors.any())              
+          .paths(PathSelectors.any())                          
+          .build();                                           
+    }
 
+	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+	    registry.addRedirectViewController("/api/v2/api-docs", "/v2/api-docs");
+	    registry.addRedirectViewController("/api/swagger-resources/configuration/ui", "/swagger-resources/configuration/ui");
+	    registry.addRedirectViewController("/api/swagger-resources/configuration/security", "/swagger-resources/configuration/security");
+	    registry.addRedirectViewController("/api/swagger-resources", "/swagger-resources");
+	}
+
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("swagger-ui.html")

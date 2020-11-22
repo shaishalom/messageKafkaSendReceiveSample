@@ -46,9 +46,9 @@ public class MessageSendService {
 	public ReplyingKafkaTemplate<String, String, String> replyingTemplate;
 
 	/**
-	 * make validation + call the repository to fetch and filter the datas
+	 * make validation + call the repository to fetch the message
 	 * 
-	 * @param listingCriteriaDTO
+	 * @param messageDTO
 	 * @return
 	 * @throws ProjBusinessException
 	 */
@@ -83,9 +83,6 @@ public class MessageSendService {
 
 		logger.info("output from topic2:" + outputFromTopic2);
 
-//		producerRepository.produce(xml,TOPIC_1);
-//		
-		// String messageXML = consumerRepository.consume();
 		MessageDTO newMessageDTO = xmLtoMessageConverter.apply(outputFromTopic2);
 
 		return newMessageDTO;

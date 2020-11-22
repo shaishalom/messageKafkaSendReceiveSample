@@ -32,7 +32,7 @@ public class MessageController {
 
 	
 	/**
-	 * get listing in Post
+	 * waiting for message to send to kafka topic
 	 * @param messageDTO
 	 * @param request
 	 * @return
@@ -53,8 +53,6 @@ public class MessageController {
 			messageOutputDTO = new MessageDTO("","");
 			return new ResponseEntity<MessageDTO>(messageOutputDTO, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		
 		
 		String output = StringUtils.toJson(messageOutputDTO);
 		logger.info("listings RESPONSE->" + output);

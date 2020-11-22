@@ -66,9 +66,9 @@ public class MessageControllerTests {
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String messageJson = ow.writeValueAsString(messageDTO);
 
-		ResponseEntity<MessageDTO> messageResponse = null;
 
 //you can run the controller directly		
+//		ResponseEntity<MessageDTO> messageResponse = null;
 //		messageResponse = messageController.message(messageDTO, null);
 //		MessageDTO messageOutDto = messageResponse.getBody();
 //		assertNotNull(messageOutDto);

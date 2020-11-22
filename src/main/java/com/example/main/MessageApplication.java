@@ -1,5 +1,8 @@
 package com.example.main;
 
+import static com.example.restservice.service.MessageSendService.TOPIC_1;
+import static com.example.restservice.service.MessageSendService.TOPIC_2;
+
 import java.util.concurrent.TimeUnit;
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -35,8 +38,6 @@ import com.thoughtworks.xstream.XStream;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import static com.example.restservice.service.MessageSendService.TOPIC_1;
-import static com.example.restservice.service.MessageSendService.TOPIC_2;
 
 @SpringBootApplication
 @ComponentScan("com.example")
@@ -92,20 +93,6 @@ public class MessageApplication implements WebMvcConfigurer{
         return kafkaTemplate;
     }
 
-//    @Bean
-//    public ApplicationRunner runner(ReplyingKafkaTemplate<String, String, String> template) {
-//        return args -> {
-//        	MessageDTO messageDTO = new MessageDTO();
-//        	messageDTO.setMessage("00000");
-//        	messageDTO.setType("11111");
-//    		String xml = messagetoXMLConverter.apply(messageDTO);
-//        	
-//        	
-//            ProducerRecord<String, String> record = new ProducerRecord<>("topic1", null, "message", xml);
-//            RequestReplyFuture<String, String, String> future = template.sendAndReceive(record);
-//            System.out.println(future.get(10, TimeUnit.SECONDS).value());
-//        };
-//    }
 
     @Bean
     public NewTopic topic() {
@@ -155,6 +142,13 @@ public class MessageApplication implements WebMvcConfigurer{
 //		return mapper;
 //
 //	}
+	
+	@Bean	
+  public ApplicationRunner runner(ReplyingKafkaTemplate<String, String, String> template) {
+  return args -> {
+      System.out.println("just check runner");
+  };
+}
 	
 
 	 

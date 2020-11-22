@@ -1,9 +1,11 @@
 יצרתי פרוייקט ויישמתי את כל מה שביקשת (הוספתי mockMVC ו swagger לקלות ההפעלה) עבדתי מול kafka  
 התקנתי סרבר קפקא (אפשר כאמור היה לעבוד עם ה docker perform, אבל גם אותו צריך להוריד :) כך שזה אותו זמן)https://github.com/shaishalom/messageSample1
-יש להיכנס לספרייה בה השרת קפקא לפתוח cmd ולהפעיל את הפקודות הבאות (בחלונות נפרדים)
+יש להיכנס לספרייה בה השרת קפקא לפתוח CMD
 2 התורים הם (שיש להגדיר)bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic1
 bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic2
 
+יש להיכנס לספרייה בה השרת קפקא לפתוח
+cmd ולהפעיל את הפקודות הבאות (בחלונות נפרדים)
 וכמובן להעלות את השרת bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 bin\windows\kafka-server-start.bat config\server.properties
 

@@ -22,7 +22,6 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -70,6 +69,7 @@ public class MessageApplication implements WebMvcConfigurer{
         System.out.println(str);
         return str;
     }
+
     
     @Bean
     public ReplyingKafkaTemplate<String, String, String> replyingTemplate(ProducerFactory<String, String> pf,
@@ -132,7 +132,7 @@ public class MessageApplication implements WebMvcConfigurer{
 	
 	ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Demo")
-				.description("commIT Project ")
+				.description("sample Project ")
 				.license("Apache 2.0")
 				.licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
 				.termsOfServiceUrl("")

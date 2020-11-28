@@ -1,0 +1,20 @@
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n
+logging.level.com.reali=INFO
+
+server.port=8080
+tempDir=C:/temp
+logging.file=${tempDir}/commIt.log
+
+
+server.port=8080
+logging.file=c:/tmp/messageLog.txt
+logging.pattern.console= %d{yyyy-MM-dd HH:mm:ss} - %m %n
+logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+logging.level.com.example=DEBUG
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.group-id=myGroup
+
+
+#logging.file=c:/shai/messageLog.txt
+#logging.file.path=c:/shai
+#logging.file.name=messageLog.txt

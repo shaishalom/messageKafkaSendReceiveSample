@@ -64,6 +64,7 @@ public class MessageSendService {
 			outputFromTopic1 = future.get(30, TimeUnit.SECONDS).value();
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			throw new ProjBusinessException(
 					new StatusDTO(OutputStatusEnum.UNEXPECTED, "fail on receiveMessage from topic1"));
 		}

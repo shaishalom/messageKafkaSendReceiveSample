@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.exception.ProjBusinessException;
 import com.example.restservice.dto.MessageDTO;
+import com.example.restservice.dto.StatusDTO;
 import com.example.restservice.service.MessageSendService;
 import com.example.restservice.util.StringUtils;
 
@@ -51,6 +52,7 @@ public class MessageController {
 			messageOutputDTO = messageSendService.sendMessage(messageDTO);
 		} catch (ProjBusinessException e) {
 			messageOutputDTO = new MessageDTO("","");
+			messageOutputDTO.setStatus(handleBusinessException(e));
 			return new ResponseEntity<MessageDTO>(messageOutputDTO, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
@@ -59,6 +61,12 @@ public class MessageController {
 		return new ResponseEntity<MessageDTO>(messageOutputDTO, new HttpHeaders(), HttpStatus.OK);
 	}
 
+	
+	public StatusDTO handleBusinessException(ProjBusinessException projBusinessException) {
+		StatusDTO status = projBusinessException.getStatus();
+		return status;
+	}
+	
 	
 
 

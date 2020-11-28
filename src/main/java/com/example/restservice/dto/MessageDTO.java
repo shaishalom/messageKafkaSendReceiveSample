@@ -2,11 +2,13 @@ package com.example.restservice.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.example.demo.exception.OutputStatusEnum;
+
 @XmlRootElement
 public class MessageDTO extends BaseInputDTO{
 
 	public MessageDTO() {
-		
+		this.setStatus(new StatusDTO(OutputStatusEnum.SUCCESS, "", ""));
 	}
 	
 	
